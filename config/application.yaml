@@ -1,0 +1,7 @@
+port: 8080
+
+db:
+  dbname: 'cinema-search'
+  user: 'postgres'
+  password: '1112'
+  sslmode: 'disable'
