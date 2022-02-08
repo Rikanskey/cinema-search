@@ -1,7 +1,7 @@
 port: 8080
 
 db:
-  dbname: 'cinema-search'
-  user: 'postgres'
+#  uri: 'jdbc:postgresql://localhost:5432/cinemasearch'
+  name: 'cinemasearch'
+  username: 'postgres'
   password: '1112'
-  sslmode: 'disable'
