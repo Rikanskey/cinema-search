@@ -3,7 +3,7 @@ package v1
 import (
 	"fmt"
 	"github.com/deepmap/oapi-codegen/pkg/runtime"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"net/http"
 )
 
@@ -66,7 +66,7 @@ func HandlerWithOptions(serverInterface ServerInterface, options ChiServerOption
 	}
 
 	router.Group(func(r chi.Router) {
-		r.Get(options.BaseUrl+"/movie", wrapper.GetMovie)
+		r.Get(options.BaseUrl+"/movie/{movieId}", wrapper.GetMovie)
 	})
 
 	return router

@@ -9,7 +9,7 @@ import (
 	"cinema-search/internal/server"
 	"database/sql"
 	"fmt"
-	_ "github.com/jackc/pgx"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"log"
 )
@@ -34,10 +34,16 @@ func initDB(cfg *config.Config) *sql.DB {
 	dbInfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
 		cfg.Postgres.Username, cfg.Postgres.Password, cfg.Postgres.Name)
 	db, err := sql.Open("postgres", dbInfo)
+	//conn, er := pgx.Connect(context.Background(), dbInfo)
+	//defer conn.Close(context.Background())
+	//if conn != nil && er == nil {
+	//	fmt.Println("wew")
+	//}
+
 	if err != nil {
 		fmt.Println("DB err")
 	}
-	defer db.Close()
+	//defer db.Close()
 	return db
 }
 
@@ -45,12 +51,10 @@ func newApplication(db *sql.DB) app.Application {
 	movieRepository := dao.NewMovieRepository(db)
 
 	return app.Application{
-		Commands: app.Commands{
-
-		},
+		Commands: app.Commands{},
 		Queries: app.Queries{
 			GetMovie: query.NewGetMovieHandler(movieRepository),
-		}
+		},
 	}
 }
 

@@ -21,6 +21,6 @@ type (
 	}
 
 	getMovie interface {
-		Handle(ctx context.Context, movieId string) (dao.Movie, error)
+		Handle(ctx context.Context, q GetMovieQuery) (dao.Movie, error)
 	}
 )

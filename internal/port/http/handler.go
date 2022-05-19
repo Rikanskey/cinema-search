@@ -25,6 +25,7 @@ func addMiddlewares(router *chi.Mux) {
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
 	router.Use(logger.NewStructuredLogger(logrus.StandardLogger()))
+	addCorsMiddleware(router)
 }
 
 func addCorsMiddleware(router *chi.Mux) {

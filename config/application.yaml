@@ -1,4 +1,5 @@
-port: 8080
+http:
+  port: 8080
 
 db:
 #  uri: 'jdbc:postgresql://localhost:5432/cinemasearch'

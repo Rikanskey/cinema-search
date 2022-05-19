@@ -1,4 +1,4 @@
-package domain
+package movie
 
 type Country struct {
 	id     uint64

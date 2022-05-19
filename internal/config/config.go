@@ -50,5 +50,8 @@ func parseConfigFile(configDir string) error {
 }
 
 func unmarshal(config *Config) error {
+	if err := viper.UnmarshalKey("http", &config.HTTP); err != nil {
+		return err
+	}
 	return viper.UnmarshalKey("db", &config.Postgres)
 }
