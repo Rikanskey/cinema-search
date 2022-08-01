@@ -1,7 +1,6 @@
 package app
 
 import (
-	"cinema-search/internal/dao"
 	"context"
 )
 
@@ -21,6 +20,6 @@ type (
 	}
 
 	getMovie interface {
-		Handle(ctx context.Context, q GetMovieQuery) (dao.Movie, error)
+		Handle(ctx context.Context, q GetMovieQuery) (Movie, error)
 	}
 )

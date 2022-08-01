@@ -1,7 +1,5 @@
 package movie
 
-import "cinema-search/internal/dao"
-
 type PersonPost struct {
 	id     uint64
 	person *Person
@@ -9,7 +7,13 @@ type PersonPost struct {
 	//movies []Movie
 }
 
-func UnmarshallPersonPostByDaoModel(personPost dao.PersonPost) *PersonPost {
+type CreatePersonPost struct {
+	Id     uint64
+	Person CreatePerson
+	Post   CreatePost
+}
+
+func UnmarshallPersonPostByDaoModel(personPost CreatePersonPost) *PersonPost {
 	return &PersonPost{
 		id:     personPost.Id,
 		person: UnmarshallPersonByDaoModel(personPost.Person),

@@ -1,18 +1,17 @@
 package movie
 
 import (
-	"cinema-search/internal/dao"
 	"time"
 )
 
 type Movie struct {
 	id          uint64
 	name        string
-	budget      uint64
-	boxOffice   uint64
+	budget      uint
+	boxOffice   uint
 	release     time.Time
 	duration    time.Time
-	synopsys    string
+	synopsis    string
 	rating      float32
 	ratingNum   uint
 	trailerLink string
@@ -29,14 +28,17 @@ type CreateMovie struct {
 	BoxOffice   uint
 	Release     time.Time
 	Duration    time.Time
-	Synopsys    string
+	Synopsis    string
 	Rating      float32
 	RatingNum   uint
 	TrailerLink string
 	PosterPath  string
+	Genres      []Genre
+	Countries   []Country
+	PersonPosts []PersonPost
 }
 
-func UnmarshallMovieByDaoModel(movie dao.Movie) *Movie {
+func UnmarshallMovieByDaoModel(movie CreateMovie) *Movie {
 	return &Movie{
 		id:          movie.Id,
 		name:        movie.Name,
@@ -44,7 +46,7 @@ func UnmarshallMovieByDaoModel(movie dao.Movie) *Movie {
 		boxOffice:   movie.BoxOffice,
 		release:     movie.Release,
 		duration:    movie.Duration,
-		synopsys:    movie.Synopsis,
+		synopsis:    movie.Synopsis,
 		rating:      movie.Rating,
 		ratingNum:   movie.RatingNum,
 		trailerLink: movie.TrailerLink,

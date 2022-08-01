@@ -12,10 +12,10 @@ func (h handler) GetMovie(w http.ResponseWriter, r *http.Request, movieId string
 		return
 	}
 
-	movie, err := h.app.Queries.GetMovie.Handle(r.Context(), q)
+	m, err := h.app.Queries.GetMovie.Handle(r.Context(), q)
 
 	if err == nil {
-		marshalMovie(w, r, movie)
+		marshalMovie(w, r, m)
 
 		return
 	}

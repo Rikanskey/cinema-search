@@ -17,7 +17,7 @@ type Movie struct {
 	PosterPath  string       `json:"posterPath,omitempty"`
 	Genres      []Genre      `json:"genres,omitempty"`
 	Countries   []Country    `json:"countries,omitempty"`
-	PersonPost  []PersonPost `json:"personPost,omitempty"`
+	PersonsPost []PersonPost `json:"personPost,omitempty"`
 }
 
 //Genre defines model for Genre

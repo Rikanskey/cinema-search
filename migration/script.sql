@@ -38,7 +38,7 @@ create table post
 alter table post
     owner to postgres;
 
-create table movie
+create table m
 (
     id           serial
         primary key,
@@ -54,7 +54,7 @@ create table movie
     poster       text
 );
 
-alter table movie
+alter table m
     owner to postgres;
 
 create table movie_genre
@@ -62,7 +62,7 @@ create table movie_genre
     id       serial
         primary key,
     movie_id integer
-        references movie
+        references m
             on update cascade on delete restrict,
     genre_id integer
         references genre
@@ -77,7 +77,7 @@ create table movie_country
     id         serial
         primary key,
     movie_id   integer
-        references movie
+        references m
             on update cascade on delete restrict,
     country_id integer
         references country
@@ -107,7 +107,7 @@ create table person_post_movie
     id             serial
         primary key,
     movie_id       integer
-        references movie
+        references m
             on update cascade on delete restrict,
     person_post_id integer
         references person_post
@@ -167,22 +167,22 @@ create table usr_rating_movie
         references usr
             on update cascade on delete restrict,
     movie_id integer
-        references movie
+        references m
             on update cascade on delete restrict,
     rating   integer
 );
 
 INSERT INTO public.authority (id, name) VALUES (1, 'ROLE_USER');
 
-INSERT INTO public.movie (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (5, 'The Lord of the Rings: The Return of the Kings', 94000000, 377027325, '2003-12-01', '03:21:00', 'Aragorn is revealed as the heir to the ancient kings as he, Gandalf and the other members of the broken fellowship struggle to save Gondor.', 6.733333, 3, 'https://www.youtube.com/embed/r5X-hFf6Bwo', 'D:\movie-library-images\movie-posters\Lord-of-rings3-poster.jpg');
-INSERT INTO public.movie (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (4, 'The Godfather', 6000000, 243862778, '1972-03-14', '02:55:00', 'In late summer 1945, guests are gathered for the wedding reception of Don Vito Corleone''s daughter Connie and Carlo Rizzi. Vito, the head of the Corleone Mafia family, is known to friends and associates as "Godfather." He and Tom Hagen, the Corleone family lawyer and Vito''s adopted son, are hearing requests for favors because, according to Italian tradition, "no Sicilian can refuse a request on his daughter''s wedding day." One of the men who asks the Don for a favor is Amerigo Bonasera, a mortician and acquaintance of the Don, whose daughter was brutally beaten by two young men for refusing their advances; the men received minimal punishment. The Don is disappointed in Bonasera, who''d avoided most contact with the Don due to Corleone''s criminal dealings. The Don''s wife is godmother to Bonasera''s shamed daughter, a relationship the Don uses to extract new loyalty from the undertaker. The Don agrees to have his men punish the young men responsible in return for future service if necessary.', 8.885715, 7, 'https://www.youtube.com/embed/sY1S34973zA', 'D:\movie-library-images\movie-posters\Godfather-poster.jpg');
-INSERT INTO public.movie (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (3, 'Pulp Fiction', 8000000, 213900000, '1994-05-21', '02:34:00', 'Vincent Vega and Jules Winnfield are hitmen with a penchant for philosophical discussions. In this ultra-hip, multi-strand crime movie, their storyline is interwoven with those of their boss, gangster Marsellus Wallace; hist actress wife, Mia; struggling boxer Butch Coolidge; master fixer Winston Wolfe and a nervous pair of armed robbers, "Pumpkin" and "Honey Bunny".', 8.4, 5, 'https://www.youtube.com/embed/s7EdQ4FqbhY', 'D:\movie-library-images\movie-posters\Pulp-Fiction-poster.jpg');
-INSERT INTO public.movie (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (1, 'Tenet', 205000000, 300000000, '2020-09-03', '02:30:00', 'Armed with only one word—Tenet—and fighting for the survival of the entire world, the Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.
+INSERT INTO public.movie (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (5, 'The Lord of the Rings: The Return of the Kings', 94000000, 377027325, '2003-12-01', '03:21:00', 'Aragorn is revealed as the heir to the ancient kings as he, Gandalf and the other members of the broken fellowship struggle to save Gondor.', 6.733333, 3, 'https://www.youtube.com/embed/r5X-hFf6Bwo', 'D:\m-library-images\m-posters\Lord-of-rings3-poster.jpg');
+INSERT INTO public.movie  (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (4, 'The Godfather', 6000000, 243862778, '1972-03-14', '02:55:00', 'In late summer 1945, guests are gathered for the wedding reception of Don Vito Corleone''s daughter Connie and Carlo Rizzi. Vito, the head of the Corleone Mafia family, is known to friends and associates as "Godfather." He and Tom Hagen, the Corleone family lawyer and Vito''s adopted son, are hearing requests for favors because, according to Italian tradition, "no Sicilian can refuse a request on his daughter''s wedding day." One of the men who asks the Don for a favor is Amerigo Bonasera, a mortician and acquaintance of the Don, whose daughter was brutally beaten by two young men for refusing their advances; the men received minimal punishment. The Don is disappointed in Bonasera, who''d avoided most contact with the Don due to Corleone''s criminal dealings. The Don''s wife is godmother to Bonasera''s shamed daughter, a relationship the Don uses to extract new loyalty from the undertaker. The Don agrees to have his men punish the young men responsible in return for future service if necessary.', 8.885715, 7, 'https://www.youtube.com/embed/sY1S34973zA', 'D:\m-library-images\m-posters\Godfather-poster.jpg');
+INSERT INTO public.movie  (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (3, 'Pulp Fiction', 8000000, 213900000, '1994-05-21', '02:34:00', 'Vincent Vega and Jules Winnfield are hitmen with a penchant for philosophical discussions. In this ultra-hip, multi-strand crime m, their storyline is interwoven with those of their boss, gangster Marsellus Wallace; hist actress wife, Mia; struggling boxer Butch Coolidge; master fixer Winston Wolfe and a nervous pair of armed robbers, "Pumpkin" and "Honey Bunny".', 8.4, 5, 'https://www.youtube.com/embed/s7EdQ4FqbhY', 'D:\m-library-images\m-posters\Pulp-Fiction-poster.jpg');
+INSERT INTO public.movie  (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (1, 'Tenet', 205000000, 300000000, '2020-09-03', '02:30:00', 'Armed with only one word—Tenet—and fighting for the survival of the entire world, the Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.
 
-Not time travel. Inversion.', 8.6, 5, 'https://www.youtube.com/embed/L3pk_TBkihU', 'D:\movie-library-images\movie-posters\Tenet-poster.jpg');
-INSERT INTO public.movie (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (2, 'Lock, Stock and Two Smoking Barrels', 1350000, 25000000, '1998-08-23', '01:47:00', 'Hoping to make a bundle in a high-stakes poker game, four shiftless lad from London''s East End instead find themselves swimming in debt.', 9.083333, 6, 'https://www.youtube.com/embed/h6hZkvrFIj0', 'D:\movie-library-images\movie-posters\Lock-Stock-2-Smoking-Barrels-poster.jpg');
+Not time travel. Inversion.', 8.6, 5, 'https://www.youtube.com/embed/L3pk_TBkihU', 'D:\m-library-images\m-posters\Tenet-poster.jpg');
+INSERT INTO public.movie  (id, name, budget, box_office, release, duration, synopsis, rating, rating_num, trailer_link, poster) VALUES (2, 'Lock, Stock and Two Smoking Barrels', 1350000, 25000000, '1998-08-23', '01:47:00', 'Hoping to make a bundle in a high-stakes poker game, four shiftless lad from London''s East End instead find themselves swimming in debt.', 9.083333, 6, 'https://www.youtube.com/embed/h6hZkvrFIj0', 'D:\m-library-images\m-posters\Lock-Stock-2-Smoking-Barrels-poster.jpg');
 
-INSERT INTO public.usr (id, username, password, account_non_expired, account_non_locked, credentials_non_expired, enabled, avatar) VALUES (1, 'testuser', '$2a$10$8n5lLmZL4R6q.VxL5Hm6muLStqTKMgR9cCureiipxzbKIVsakLPIK', true, true, true, true, 'D:\movie-library-images\users-avatar\testuser-avatar.jpeg');
+INSERT INTO public.usr (id, username, password, account_non_expired, account_non_locked, credentials_non_expired, enabled, avatar) VALUES (1, 'testuser', '$2a$10$8n5lLmZL4R6q.VxL5Hm6muLStqTKMgR9cCureiipxzbKIVsakLPIK', true, true, true, true, 'D:\m-library-images\users-avatar\testuser-avatar.jpeg');
 
 INSERT INTO public.post (id, name) VALUES (1, 'director');
 INSERT INTO public.post (id, name) VALUES (2, 'writer');

@@ -2,26 +2,12 @@ package dao
 
 import "time"
 
-//type Movie struct {
-//	Id          uint64        `json:"id"`
-//	Name        string        `json:"name"`
-//	Budget      uint64        `json:"budget"`
-//	BoxOffice   uint64        `json:"box_office"`
-//	Release     time.Time     `json:"release"`
-//	Duration    time.Duration `json:"duration"`
-//	Synopsis    string        `json:"synopsis"`
-//	Rating      float32       `json:"rating"`
-//	RatingNum   float32       `json:"rating_num"`
-//	TrailerLink string        `json:"trailer_link"`
-//	PosterPath      string        `json:"poster"`
-//}
-
 type (
 	Movie struct {
 		Id          uint64    `db:"id"`
 		Name        string    `db:"name"`
-		Budget      uint64    `db:"budget"`
-		BoxOffice   uint64    `db:"box_office"`
+		Budget      uint      `db:"budget"`
+		BoxOffice   uint      `db:"box_office"`
 		Release     time.Time `db:"release"`
 		Duration    time.Time `db:"duration"`
 		Synopsis    string    `db:"synopsis"`

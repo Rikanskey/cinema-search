@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"cinema-search/internal/app"
 	"context"
 	"database/sql"
 	"github.com/sirupsen/logrus"
@@ -15,49 +16,49 @@ func NewMovieRepository(db *sql.DB) *MovieRepository {
 	return &MovieRepository{movies: db}
 }
 
-func (m *MovieRepository) GetMovieById(ctx context.Context, movieId string) (Movie, error) {
+func (m *MovieRepository) GetMovieById(ctx context.Context, movieId string) (app.Movie, error) {
 	stmt, err := m.movies.Prepare("SELECT * FROM movie WHERE id=$1")
 	defer stmt.Close()
 	if err != nil {
 		logrus.WithError(err).Println("Failed with \"Get movie by id\" query")
-		return Movie{}, err
+		return app.Movie{}, err
 	}
 
 	result, err := stmt.QueryContext(ctx, movieId)
 	if err != nil {
 		logrus.WithError(err).Println("Failed with \"Get movie by id\" query")
-		return Movie{}, err
+		return app.Movie{}, err
 	}
 	movie := Movie{}
 	result.Next()
 	if err := result.Scan(&movie.Id, &movie.Name, &movie.Budget, &movie.BoxOffice, &movie.Release, &movie.Duration,
 		&movie.Synopsis, &movie.Rating, &movie.RatingNum, &movie.TrailerLink, &movie.PosterPath); err != nil {
 		logrus.WithError(err).Println("Failed with \"Get movie by id\" query")
-		return movie, err
+		return unmarshallAppMovie(movie), err
 	}
 
 	genres, err := m.getMovieGenres(ctx, movieId)
 	if err != nil {
 		logrus.WithError(err).Println("Failed with \"Get movie by id\" query")
-		return movie, err
+		return unmarshallAppMovie(movie), err
 	}
 	movie.Genres = genres
 
 	countries, err := m.getMovieCountries(ctx, movieId)
 	if err != nil {
 		logrus.WithError(err).Println("Failed with \"Get movie by id\" query")
-		return movie, err
+		return unmarshallAppMovie(movie), err
 	}
 	movie.Countries = countries
 
 	personPosts, err := m.getMoviePersonPosts(ctx, movieId)
 	if err != nil {
 		logrus.WithError(err).Println("Failed with \"Get movie by id\" query")
-		return movie, err
+		return unmarshallAppMovie(movie), err
 	}
 	movie.PersonPosts = personPosts
 
-	return movie, nil
+	return unmarshallAppMovie(movie), nil
 }
 
 func (m *MovieRepository) getMovieGenres(ctx context.Context, movieId string) ([]Genre, error) {
